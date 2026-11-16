@@ -1,0 +1,395 @@
+.game-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, var(--blush-light), var(--cream));
+  border-radius: 20px;
+  box-shadow: 
+    0 8px 24px rgba(232, 67, 147, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  width: 100%;
+  max-width: 400px;
+}
+
+.attempts-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.attempts-label {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.3rem;
+  color: var(--text-medium);
+}
+
+.attempts-value {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: var(--pink-deep);
+  text-shadow: 0 2px 4px rgba(232, 67, 147, 0.2);
+}
+
+.progress-bar {
+  width: 100%;
+  max-width: 300px;
+  height: 10px;
+  background: var(--blush-light);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--pink-deep), var(--pink), var(--pink-light));
+  border-radius: 10px;
+  transition: width 0.3s ease-out;
+  box-shadow: 0 0 10px rgba(255, 107, 157, 0.5);
+  position: relative;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: progressShine 1.5s ease-in-out infinite;
+}
+
+@keyframes progressShine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.code-game-container {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto 20px;
+}
+
+.code-input-wrapper {
+  background: linear-gradient(135deg, var(--cream) 0%, var(--blush-light) 100%);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 
+    0 16px 48px rgba(232, 67, 147, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  border: 2px solid var(--blush);
+}
+
+.code-label {
+  display: block;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.3rem;
+  color: var(--pink-deep);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.code-inputs {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.code-inputs input {
+  width: 64px;
+  height: 64px;
+  border: 3px solid var(--blush);
+  border-radius: 16px;
+  background: var(--white);
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--pink-deep);
+  text-align: center;
+  text-transform: uppercase;
+  outline: none;
+  transition: all var(--transition-fast);
+  box-shadow: 
+    inset 0 2px 8px rgba(0,0,0,0.05),
+    0 2px 4px rgba(232, 67, 147, 0.05);
+}
+
+.code-inputs input:focus {
+  border-color: var(--pink);
+  box-shadow: 
+    0 0 0 4px rgba(255, 107, 157, 0.2),
+    inset 0 2px 8px rgba(0,0,0,0.05);
+  transform: scale(1.05);
+}
+
+.code-inputs input:disabled {
+  background: var(--cream-dark);
+  color: var(--text-light);
+  cursor: not-allowed;
+}
+
+.code-inputs input::placeholder {
+  color: var(--text-light);
+  opacity: 0.5;
+}
+
+.submit-btn {
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+  display: block;
+  padding: 16px 32px;
+  font-size: 1.2rem;
+}
+
+.hint-section {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.hint-btn {
+  margin-bottom: 12px;
+}
+
+.hint-content {
+  animation: hintSlideIn 0.3s ease-out;
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--blush-light) 100%);
+  border-radius: 16px;
+  padding: 20px 24px;
+  border: 2px dashed var(--gold);
+  box-shadow: 0 8px 24px rgba(255, 215, 0, 0.2);
+}
+
+@keyframes hintSlideIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hint-icon {
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+  animation: iconBounce 2s ease-in-out infinite;
+}
+
+@keyframes iconBounce {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-6px) rotate(5deg); }
+}
+
+.hint-text {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.2rem;
+  color: var(--pink-deep);
+  margin-bottom: 8px;
+}
+
+.hint-clue {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2rem;
+  color: var(--pink-deep);
+  font-weight: 400;
+}
+
+.attempts-history {
+  margin-top: 24px;
+  background: var(--white);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 
+    0 8px 24px rgba(232, 67, 147, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.history-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.2rem;
+  color: var(--text-medium);
+  text-align: center;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.attempts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.attempt-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: var(--cream);
+  border-radius: 10px;
+  transition: all var(--transition-fast);
+}
+
+.attempt-item.correct {
+  background: linear-gradient(135deg, var(--gold-light), var(--blush-light));
+  border: 2px solid var(--gold);
+}
+
+.attempt-item.incorrect {
+  border-left: 4px solid var(--pink-light);
+}
+
+.attempt-number {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-medium);
+  min-width: 40px;
+}
+
+.attempt-code {
+  font-family: 'Space Mono', monospace;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--pink-deep);
+  letter-spacing: 0.3em;
+  text-align: center;
+  flex: 1;
+}
+
+.attempt-result {
+  font-size: 1.2rem;
+  font-weight: bold;
+  min-width: 24px;
+  text-align: center;
+}
+
+.attempt-item.correct .attempt-result {
+  color: var(--gold);
+}
+
+.attempt-item.incorrect .attempt-result {
+  color: var(--pink-light);
+}
+
+.code-celebration {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  pointer-events: none;
+  animation: celebrationReveal 0.5s var(--bounce);
+  border-radius: 24px;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.95), rgba(255, 245, 248, 0.9));
+}
+
+@keyframes celebrationReveal {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.celebration-hearts {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.celeb-heart {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 32px;
+  opacity: 0;
+  animation: 
+    celebHeartBurst 1s ease-out var(--delay) forwards,
+    celebHeartSpin 1s linear infinite var(--delay);
+}
+
+@keyframes celebHeartBurst {
+  0% { transform: translate(-50%, -50%) rotate(var(--angle)) translateX(0) scale(0); opacity: 1; }
+  50% { transform: translate(-50%, -50%) rotate(var(--angle)) translateX(150px) scale(1.3); opacity: 1; }
+  100% { transform: translate(-50%, -50%) rotate(var(--angle)) translateX(300px) scale(0.5); opacity: 0; }
+}
+
+@keyframes celebHeartSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.celebration-text {
+  position: relative;
+  z-index: 10;
+  font-family: 'Great Vibes', cursive;
+  font-size: 3rem;
+  color: var(--pink-deep);
+  text-shadow: 0 4px 16px rgba(232, 67, 147, 0.3);
+  animation: textPop 0.5s var(--bounce) 0.3s both;
+}
+
+@keyframes textPop {
+  from { opacity: 0; transform: scale(0.5); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.game-message {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.3rem;
+  color: var(--pink-deep);
+  text-align: center;
+  min-height: 40px;
+  padding: 12px 20px;
+  background: var(--blush-light);
+  border-radius: 50px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(232, 67, 147, 0.1);
+  transition: all var(--transition-fast);
+}
+
+.restart-btn {
+  margin-bottom: 12px;
+}
+
+.next-btn {
+  animation: btnPopIn 0.5s var(--bounce) both;
+}
+
+@keyframes btnPopIn {
+  from { opacity: 0; transform: scale(0.8) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@media (max-width: 480px) {
+  .code-inputs {
+    gap: 8px;
+  }
+  
+  .code-inputs input {
+    width: 52px;
+    height: 52px;
+    font-size: 1.5rem;
+  }
+  
+  .code-input-wrapper {
+    padding: 24px 20px;
+    border-radius: 16px;
+  }
+  
+  .attempts-value {
+    font-size: 2rem;
+  }
+  
+  .celebration-text {
+    font-size: 2.2rem;
+  }
+  
+  .hint-clue {
+    font-size: 1.6rem;
+  }
+}

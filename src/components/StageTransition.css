@@ -1,0 +1,140 @@
+.stage-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  animation: transitionFadeIn 0.3s ease-out forwards;
+}
+
+@keyframes transitionFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.stage-transition.forward {
+  animation: transitionFadeIn 0.3s ease-out forwards;
+}
+
+.stage-transition.backward {
+  animation: transitionFadeIn 0.3s ease-out forwards;
+}
+
+.transition-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--cream) 0%, var(--blush-light) 50%, var(--cream) 100%);
+  opacity: 0.95;
+  animation: overlayReveal 0.6s ease-in-out;
+}
+
+@keyframes overlayReveal {
+  from { clip-path: inset(50% 50% 50% 50%); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+.transition-hearts {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.transition-heart {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 32px;
+  height: 32px;
+  color: var(--pink);
+  opacity: 0;
+  animation: 
+    heartBurstOut 0.8s ease-out var(--delay) forwards,
+    heartFade 0.8s ease-out var(--delay) forwards;
+  transform-origin: center;
+}
+
+.transition-heart svg {
+  width: 100%;
+  height: 100%;
+  animation: heartSpin 1s linear infinite;
+}
+
+@keyframes heartBurstOut {
+  0% {
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(0) scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(var(--distance)) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes heartFade {
+  0%, 60% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes heartSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.transition-text {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  animation: textReveal 0.6s ease-out 0.2s both;
+}
+
+@keyframes textReveal {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.transition-label {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--pink-deep);
+  text-shadow: 0 2px 8px rgba(232, 67, 147, 0.2);
+}
+
+.transition-heart-icon {
+  font-size: 2rem;
+  animation: iconBounce 1s ease-in-out infinite;
+}
+
+@keyframes iconBounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-8px) scale(1.1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage-transition {
+    animation: none;
+    opacity: 1;
+  }
+  
+  .transition-overlay {
+    animation: none;
+    clip-path: inset(0 0 0 0);
+  }
+  
+  .transition-heart {
+    animation: none;
+    opacity: 0;
+  }
+  
+  .transition-text {
+    animation: none;
+  }
+}

@@ -1,0 +1,259 @@
+.game-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, var(--blush-light), var(--cream));
+  border-radius: 20px;
+  box-shadow: 
+    0 8px 24px rgba(232, 67, 147, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  width: 100%;
+  max-width: 400px;
+}
+
+.stats-row {
+  display: flex;
+  gap: 32px;
+  width: 100%;
+  justify-content: center;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.stat-label {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.1rem;
+  color: var(--text-medium);
+  text-align: center;
+}
+
+.stat-value {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: var(--pink-deep);
+  text-shadow: 0 2px 4px rgba(232, 67, 147, 0.2);
+}
+
+.progress-bar {
+  width: 100%;
+  max-width: 300px;
+  height: 10px;
+  background: var(--blush-light);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--pink-deep), var(--pink), var(--pink-light));
+  border-radius: 10px;
+  transition: width 0.4s ease-out;
+  box-shadow: 0 0 10px rgba(255, 107, 157, 0.5);
+  position: relative;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: progressShine 1.5s ease-in-out infinite;
+}
+
+@keyframes progressShine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto 20px;
+  perspective: 1000px;
+}
+
+.memory-card {
+  aspect-ratio: 1;
+  border: none;
+  background: transparent;
+  border-radius: 16px;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 8px 24px rgba(232, 67, 147, 0.12),
+    0 2px 8px rgba(165, 94, 234, 0.08);
+  position: relative;
+}
+
+.memory-card:hover:not(.matched):not(.flipped):not(:disabled) {
+  transform: translateY(-4px) rotateY(0deg);
+  box-shadow: 
+    0 16px 32px rgba(232, 67, 147, 0.18),
+    0 4px 12px rgba(165, 94, 234, 0.12);
+}
+
+.memory-card:focus-visible {
+  outline: 3px solid var(--lavender-light);
+  outline-offset: 3px;
+}
+
+.memory-card.flipped {
+  transform: rotateY(180deg);
+}
+
+.memory-card.matched {
+  transform: rotateY(180deg);
+  animation: matchPulse 0.6s var(--bounce);
+  box-shadow: 
+    0 0 0 3px var(--pink-light),
+    0 12px 32px rgba(255, 107, 157, 0.3);
+}
+
+@keyframes matchPulse {
+  0% { transform: rotateY(180deg) scale(1); }
+  50% { transform: rotateY(180deg) scale(1.1); }
+  100% { transform: rotateY(180deg) scale(1); }
+}
+
+.memory-card:disabled {
+  cursor: default;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  border-radius: 16px;
+}
+
+.card-back,
+.card-front {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-back {
+  background: linear-gradient(135deg, var(--pink-deep) 0%, var(--pink) 100%);
+  box-shadow: inset 0 2px 4px rgba(255,255,255,0.2);
+}
+
+.card-back svg {
+  width: 48px;
+  height: 48px;
+  animation: backHeartBeat 2s ease-in-out infinite;
+}
+
+@keyframes backHeartBeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.card-front {
+  background: linear-gradient(135deg, var(--white) 0%, var(--cream) 100%);
+  transform: rotateY(180deg);
+  box-shadow: inset 0 2px 4px rgba(255,255,255,0.5);
+}
+
+.heart-emoji {
+  font-size: 2.5rem;
+  filter: drop-shadow(0 2px 4px rgba(232, 67, 147, 0.2));
+}
+
+.match-glow {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  font-size: 1.5rem;
+  animation: glowPop 0.8s ease-out;
+  pointer-events: none;
+  z-index: 10;
+}
+
+@keyframes glowPop {
+  0% { transform: scale(0) rotate(-45deg); opacity: 0; }
+  50% { transform: scale(1.3) rotate(0deg); opacity: 1; }
+  100% { transform: scale(1) rotate(10deg); opacity: 1; }
+}
+
+.game-message {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.3rem;
+  color: var(--pink-deep);
+  text-align: center;
+  min-height: 40px;
+  padding: 12px 20px;
+  background: var(--blush-light);
+  border-radius: 50px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(232, 67, 147, 0.1);
+  transition: all var(--transition-fast);
+}
+
+.restart-btn {
+  margin-bottom: 12px;
+}
+
+.next-btn {
+  animation: btnPopIn 0.5s var(--bounce) both;
+}
+
+@keyframes btnPopIn {
+  from { opacity: 0; transform: scale(0.8) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@media (max-width: 480px) {
+  .memory-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    max-width: 320px;
+  }
+  
+  .stats-row {
+    gap: 20px;
+  }
+  
+  .stat-value {
+    font-size: 1.8rem;
+  }
+  
+  .heart-emoji {
+    font-size: 2rem;
+  }
+  
+  .card-back svg {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 360px) {
+  .memory-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    max-width: 280px;
+  }
+}

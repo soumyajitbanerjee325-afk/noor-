@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Parisienne&family=Dancing+Script:wght@400;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --pink-deep: #e84393;
+  --pink: #ff6b9d;
+  --pink-light: #ff8fab;
+  --blush: #ffb3d1;
+  --blush-light: #ffd6e8;
+  --cream: #fff5f8;
+  --cream-dark: #ffeef3;
+  --cream-darker: #ffe8f0;
+  --white: #ffffff;
+  --lavender: #a55eea;
+  --lavender-light: #c48bff;
+  --gold: #ffd700;
+  --gold-light: #fff8e7;
+  --text-dark: #4a3a45;
+  --text-medium: #6b5b65;
+  --text-light: #c9b896;
+  --shadow-soft: rgba(232, 67, 147, 0.15);
+  --shadow-medium: rgba(232, 67, 147, 0.25);
+  --shadow-strong: rgba(165, 94, 234, 0.2);
+  --transition-fast: 0.3s ease;
+  --transition-normal: 0.5s ease;
+  --transition-slow: 0.8s ease;
+  --bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Quicksand', sans-serif;
+  background: linear-gradient(135deg, var(--cream) 0%, var(--cream-dark) 40%, var(--blush-light) 100%);
+  color: var(--text-dark);
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  z-index: 10;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+::selection {
+  background: var(--pink);
+  color: var(--white);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

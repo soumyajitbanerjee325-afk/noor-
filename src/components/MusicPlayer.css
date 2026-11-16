@@ -1,0 +1,212 @@
+.music-player {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--pink-deep), var(--pink));
+  box-shadow: 
+    0 8px 24px rgba(232, 67, 147, 0.4),
+    0 4px 12px rgba(232, 67, 147, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  z-index: 100;
+  border: none;
+  overflow: visible;
+}
+
+.music-player:hover:not(.disabled) {
+  transform: scale(1.08);
+  box-shadow: 
+    0 12px 32px rgba(232, 67, 147, 0.5),
+    0 6px 16px rgba(232, 67, 147, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.music-player:active:not(.disabled) {
+  transform: scale(0.95);
+}
+
+.music-player:focus-visible {
+  outline: 3px solid var(--lavender-light);
+  outline-offset: 3px;
+}
+
+.music-player.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: var(--text-light);
+}
+
+.music-icon {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  z-index: 2;
+}
+
+.music-icon svg {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  transition: all var(--transition-fast);
+}
+
+.icon-play {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+.icon-pause {
+  opacity: 0;
+  transform: scale(0.5) rotate(-90deg);
+}
+
+.icon-muted {
+  opacity: 0;
+  transform: scale(0.5) rotate(90deg);
+}
+
+.music-player.playing .icon-play {
+  opacity: 0;
+  transform: scale(0.5) rotate(90deg);
+}
+
+.music-player.playing .icon-pause {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+.music-player.disabled .icon-play,
+.music-player.disabled .icon-pause {
+  opacity: 0;
+}
+
+.music-player.disabled .icon-muted {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+.music-tooltip {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: var(--text-dark);
+  color: var(--white);
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all var(--transition-fast);
+  pointer-events: none;
+}
+
+.music-tooltip::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  right: 16px;
+  width: 12px;
+  height: 12px;
+  background: var(--text-dark);
+  transform: rotate(45deg);
+}
+
+.shortcut {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.7rem;
+}
+
+.music-player:hover .music-tooltip,
+.music-player:focus .music-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.music-waves {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+}
+
+.music-player.playing .music-waves {
+  opacity: 1;
+}
+
+.music-waves span {
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--pink-light);
+  border-radius: 50%;
+  animation: waveExpand 2s ease-out infinite;
+}
+
+@keyframes waveExpand {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+.music-note {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  font-size: 1.2rem;
+  color: var(--pink-deep);
+  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.8);
+  animation: noteFloat 2s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 3;
+}
+
+@keyframes noteFloat {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-6px) rotate(5deg); }
+}
+
+@media (max-width: 480px) {
+  .music-player {
+    top: 12px;
+    right: 12px;
+    width: 48px;
+    height: 48px;
+  }
+  
+  .music-tooltip {
+    display: none;
+  }
+}

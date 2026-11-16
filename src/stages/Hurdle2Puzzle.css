@@ -1,0 +1,345 @@
+.game-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, var(--blush-light), var(--cream));
+  border-radius: 20px;
+  box-shadow: 
+    0 8px 24px rgba(232, 67, 147, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  width: 100%;
+  max-width: 400px;
+}
+
+.stats-row {
+  display: flex;
+  gap: 24px;
+  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 80px;
+}
+
+.stat-label {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.1rem;
+  color: var(--text-medium);
+  text-align: center;
+}
+
+.stat-value {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: var(--pink-deep);
+  text-shadow: 0 2px 4px rgba(232, 67, 147, 0.2);
+}
+
+.progress-bar {
+  width: 100%;
+  max-width: 300px;
+  height: 10px;
+  background: var(--blush-light);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--pink-deep), var(--pink), var(--pink-light));
+  border-radius: 10px;
+  transition: width 0.4s ease-out;
+  box-shadow: 0 0 10px rgba(255, 107, 157, 0.5);
+  position: relative;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: progressShine 1.5s ease-in-out infinite;
+}
+
+@keyframes progressShine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.puzzle-container {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto 20px;
+}
+
+.puzzle-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  aspect-ratio: 1;
+  background: linear-gradient(135deg, var(--cream) 0%, var(--blush-light) 100%);
+  border-radius: 20px;
+  padding: 12px;
+  box-shadow: 
+    0 16px 48px rgba(232, 67, 147, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  position: relative;
+}
+
+.puzzle-grid::before {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  background: 
+    radial-gradient(ellipse at center, transparent 40%, rgba(232, 67, 147, 0.05) 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 90 C20 90 0 70 0 45 C0 20 20 0 45 0 C55 0 65 10 65 25 C65 10 75 0 85 0 C95 0 100 20 100 45 C100 70 80 90 50 90 Z' fill='none' stroke='%23ff6b9d' stroke-width='0.5' opacity='0.1'/%3E%3C/svg%3E");
+  background-size: 60%;
+  background-position: center;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+.puzzle-slot {
+  position: relative;
+  aspect-ratio: 1;
+  background: var(--cream-dark);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    inset 0 2px 8px rgba(0,0,0,0.08),
+    0 2px 4px rgba(232, 67, 147, 0.05);
+  transition: all var(--transition-fast);
+  z-index: 1;
+}
+
+.puzzle-slot.drag-over {
+  background: var(--pink-light);
+  box-shadow: 
+    inset 0 0 0 3px var(--pink),
+    0 4px 12px rgba(255, 107, 157, 0.3);
+  transform: scale(1.02);
+}
+
+.puzzle-slot.correct {
+  box-shadow: 
+    inset 0 0 0 2px var(--pink-light),
+    0 4px 12px rgba(255, 107, 157, 0.2);
+}
+
+.puzzle-piece {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23ff6b9d'/%3E%3Cstop offset='100%25' stop-color='%23e84393'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M150 270 C60 270 0 210 0 135 C0 60 60 0 135 0 C165 0 195 30 195 67.5 C195 30 210 0 240 0 C285 0 300 60 300 135 C300 210 240 270 150 270 Z' fill='url(%23g)'/%3E%3C/svg%3E");
+  background-size: 300% 300%;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+  box-shadow: 
+    0 4px 12px rgba(232, 67, 147, 0.2),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
+  cursor: grab;
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.puzzle-piece:active,
+.puzzle-piece.dragging {
+  cursor: grabbing;
+  transform: scale(1.05) rotate(2deg);
+  box-shadow: 
+    0 8px 24px rgba(232, 67, 147, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
+  z-index: 50;
+}
+
+.puzzle-piece.correct {
+  animation: pieceSettle 0.4s var(--bounce);
+}
+
+@keyframes pieceSettle {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); box-shadow: 0 0 0 3px var(--pink-light), 0 8px 24px rgba(255, 107, 157, 0.3); }
+  100% { transform: scale(1); box-shadow: inset 0 0 0 2px var(--pink-light), 0 4px 12px rgba(255, 107, 157, 0.2); }
+}
+
+.piece-number {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 20px;
+  height: 20px;
+  background: rgba(0,0,0,0.3);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+.check-mark {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  width: 22px;
+  height: 22px;
+  background: var(--pink-deep);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+  animation: checkPop 0.3s var(--bounce);
+  pointer-events: none;
+}
+
+@keyframes checkPop {
+  from { transform: scale(0) rotate(-45deg); opacity: 0; }
+  to { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.puzzle-celebration {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  pointer-events: none;
+  animation: celebrationReveal 0.5s var(--bounce);
+  border-radius: 20px;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.95), rgba(255, 245, 248, 0.9));
+}
+
+@keyframes celebrationReveal {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.celebration-hearts {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.celeb-heart {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 32px;
+  opacity: 0;
+  animation: 
+    celebHeartBurst 1s ease-out var(--delay) forwards,
+    celebHeartSpin 1s linear infinite var(--delay);
+}
+
+@keyframes celebHeartBurst {
+  0% { transform: translate(-50%, -50%) rotate(var(--angle)) translateX(0) scale(0); opacity: 1; }
+  50% { transform: translate(-50%, -50%) rotate(var(--angle)) translateX(150px) scale(1.3); opacity: 1; }
+  100% { transform: translate(-50%, -50%) rotate(var(--angle)) translateX(300px) scale(0.5); opacity: 0; }
+}
+
+@keyframes celebHeartSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.celebration-text {
+  position: relative;
+  z-index: 10;
+  font-family: 'Great Vibes', cursive;
+  font-size: 3rem;
+  color: var(--pink-deep);
+  text-shadow: 0 4px 16px rgba(232, 67, 147, 0.3);
+  animation: textPop 0.5s var(--bounce) 0.3s both;
+}
+
+@keyframes textPop {
+  from { opacity: 0; transform: scale(0.5); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.game-message {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.3rem;
+  color: var(--pink-deep);
+  text-align: center;
+  min-height: 40px;
+  padding: 12px 20px;
+  background: var(--blush-light);
+  border-radius: 50px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(232, 67, 147, 0.1);
+  transition: all var(--transition-fast);
+}
+
+.restart-btn {
+  margin-bottom: 12px;
+}
+
+.next-btn {
+  animation: btnPopIn 0.5s var(--bounce) both;
+}
+
+@keyframes btnPopIn {
+  from { opacity: 0; transform: scale(0.8) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@media (max-width: 480px) {
+  .puzzle-grid {
+    gap: 6px;
+    padding: 8px;
+    border-radius: 16px;
+  }
+  
+  .stats-row {
+    gap: 16px;
+  }
+  
+  .stat {
+    min-width: 70px;
+  }
+  
+  .stat-value {
+    font-size: 1.8rem;
+  }
+  
+  .celebration-text {
+    font-size: 2.2rem;
+  }
+  
+  .piece-number {
+    width: 18px;
+    height: 18px;
+    font-size: 0.65rem;
+  }
+}

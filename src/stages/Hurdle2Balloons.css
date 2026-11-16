@@ -1,0 +1,406 @@
+.game-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, var(--blush-light), var(--cream));
+  border-radius: 20px;
+  box-shadow: 
+    0 8px 24px rgba(232, 67, 147, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  width: 100%;
+  max-width: 400px;
+}
+
+.score-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.score-label {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.3rem;
+  color: var(--text-medium);
+}
+
+.score-value {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: var(--pink-deep);
+  text-shadow: 0 2px 4px rgba(232, 67, 147, 0.2);
+}
+
+.progress-bar {
+  width: 100%;
+  max-width: 300px;
+  height: 10px;
+  background: var(--blush-light);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--pink-deep), var(--pink), var(--pink-light));
+  border-radius: 10px;
+  transition: width 0.3s ease-out;
+  box-shadow: 0 0 10px rgba(255, 107, 157, 0.5);
+  position: relative;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: progressShine 1.5s ease-in-out infinite;
+}
+
+@keyframes progressShine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.game-container {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  height: 450px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #87ceeb 0%, #e0f7fa 50%, var(--cream) 100%);
+  border: 2px solid var(--blush);
+  box-shadow: 
+    0 16px 48px rgba(232, 67, 147, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  margin-bottom: 20px;
+}
+
+.sky-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cloud {
+  position: absolute;
+  left: -150px;
+  top: var(--top);
+  width: 120px;
+  height: 40px;
+  background: var(--white);
+  border-radius: 50px;
+  opacity: 0.6;
+  animation: cloudDrift var(--duration) linear var(--delay) infinite;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+}
+
+.cloud::before,
+.cloud::after {
+  content: '';
+  position: absolute;
+  background: var(--white);
+  border-radius: 50%;
+}
+
+.cloud::before {
+  width: 50px;
+  height: 50px;
+  top: -25px;
+  left: 20px;
+}
+
+.cloud::after {
+  width: 40px;
+  height: 40px;
+  top: -15px;
+  right: 15px;
+}
+
+@keyframes cloudDrift {
+  0% { transform: translateX(-150px); }
+  100% { transform: translateX(calc(100% + 150px)); }
+}
+
+.balloon {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--size);
+  height: calc(var(--size) * 1.3);
+  transform: translate(-50%, -50%) translateX(var(--wobble, 0px));
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  padding: 0;
+  z-index: 10;
+  animation: balloonFloat 3s ease-in-out infinite;
+  transition: transform 0.1s ease-out;
+}
+
+.balloon:hover {
+  transform: translate(-50%, -50%) translateX(var(--wobble, 0px)) scale(1.05);
+}
+
+.balloon:focus-visible {
+  outline: 3px solid var(--lavender-light);
+  outline-offset: 4px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+}
+
+@keyframes balloonFloat {
+  0%, 100% { 
+    transform: translate(-50%, -50%) translateX(var(--wobble, 0px)) translateY(0) rotate(-1deg); 
+  }
+  50% { 
+    transform: translate(-50%, -50%) translateX(var(--wobble, 0px)) translateY(-8px) rotate(1deg); 
+  }
+}
+
+.balloon-body {
+  width: 100%;
+  height: 100%;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  background: var(--color);
+  position: relative;
+  box-shadow: 
+    inset -8px -8px 20px rgba(0,0,0,0.1),
+    inset 8px 8px 20px rgba(255,255,255,0.3),
+    0 8px 24px rgba(0,0,0,0.12);
+  overflow: hidden;
+}
+
+.balloon-body::before {
+  content: '';
+  position: absolute;
+  top: 12%;
+  left: 15%;
+  width: 28%;
+  height: 45%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.5), transparent);
+  border-radius: 50%;
+  filter: blur(4px);
+}
+
+.balloon-shine {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 20%;
+  height: 30%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.6), transparent);
+  border-radius: 50%;
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+.balloon-string {
+  width: 2px;
+  height: 40px;
+  background: linear-gradient(180deg, transparent, var(--text-light));
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 1px;
+  opacity: 0.6;
+}
+
+.balloon-knot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color);
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  box-shadow: inset -2px -2px 4px rgba(0,0,0,0.1), inset 2px 2px 4px rgba(255,255,255,0.2);
+}
+
+.game-celebration {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  pointer-events: none;
+  animation: celebrationReveal 0.5s var(--bounce);
+}
+
+@keyframes celebrationReveal {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.celebration-balloons {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 100%;
+}
+
+.celeb-balloon {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 50px;
+  height: 65px;
+  opacity: 0;
+  animation: celebBalloonBurst 1.5s ease-out var(--delay) forwards;
+}
+
+.celeb-balloon .balloon-body {
+  width: 100%;
+  height: 100%;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  background: var(--color);
+  position: relative;
+  box-shadow: 
+    inset -5px -5px 12px rgba(0,0,0,0.1),
+    inset 5px 5px 12px rgba(255,255,255,0.3);
+}
+
+.celeb-balloon .balloon-body::before {
+  content: '';
+  position: absolute;
+  top: 12%;
+  left: 15%;
+  width: 28%;
+  height: 45%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.5), transparent);
+  border-radius: 50%;
+  filter: blur(4px);
+}
+
+.celeb-balloon .balloon-string {
+  width: 2px;
+  height: 50px;
+  background: linear-gradient(180deg, transparent, var(--text-light));
+  position: absolute;
+  bottom: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 1px;
+}
+
+@keyframes celebBalloonBurst {
+  0% {
+    transform: translateX(-50%) translateY(0) scale(0.5);
+    opacity: 1;
+  }
+  40% {
+    transform: translateX(calc(-50% + 100px * cos(var(--angle)))) translateY(-200px) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(calc(-50% + 200px * cos(var(--angle)))) translateY(-500px) scale(0.7);
+    opacity: 0;
+  }
+}
+
+.celebration-confetti {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.celeb-confetti {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background: var(--color);
+  border-radius: 2px;
+  opacity: 0;
+  animation: 
+    celebConfettiShoot 1.2s ease-out var(--delay) forwards,
+    celebConfettiSpin 1.2s linear var(--delay) forwards;
+  transform-origin: center;
+}
+
+@keyframes celebConfettiShoot {
+  0% { transform: translate(-50%, -50%) rotate(var(--angle)) translateX(0) scale(1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) rotate(var(--angle)) translateX(300px) scale(0.3); opacity: 0; }
+}
+
+@keyframes celebConfettiSpin {
+  0% { transform: translate(-50%, -50%) rotate(var(--angle)); }
+  100% { transform: translate(-50%, -50%) rotate(calc(var(--angle) + 720deg)); }
+}
+
+.celebration-text {
+  position: relative;
+  z-index: 10;
+  font-family: 'Great Vibes', cursive;
+  font-size: 3rem;
+  color: var(--pink-deep);
+  text-shadow: 0 4px 16px rgba(232, 67, 147, 0.3);
+  animation: textPop 0.5s var(--bounce) 0.3s both;
+}
+
+@keyframes textPop {
+  from { opacity: 0; transform: scale(0.5); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.game-message {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.3rem;
+  color: var(--pink-deep);
+  text-align: center;
+  min-height: 40px;
+  padding: 12px;
+  background: var(--blush-light);
+  border-radius: 50px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(232, 67, 147, 0.1);
+  transition: all var(--transition-fast);
+}
+
+.start-btn,
+.next-btn {
+  animation: btnPopIn 0.5s var(--bounce) both;
+}
+
+@keyframes btnPopIn {
+  from { opacity: 0; transform: scale(0.8) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@media (max-width: 480px) {
+  .game-container {
+    height: 400px;
+    border-radius: 16px;
+  }
+  
+  .score-value {
+    font-size: 2rem;
+  }
+  
+  .celebration-text {
+    font-size: 2.2rem;
+  }
+  
+  .balloon {
+    width: 50px;
+    height: 65px;
+  }
+}
