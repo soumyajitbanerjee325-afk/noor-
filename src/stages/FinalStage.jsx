@@ -156,7 +156,7 @@ function FinalStage({ onRestart }) {
           <div className="photo-frame">
             <div className="couple-photo">
               <img
-                src="/photos/us.jpg"
+                src="./photos/us.jpg"
                 alt="Us together - Soumy & Noor"
                 className="couple-real-img"
               />

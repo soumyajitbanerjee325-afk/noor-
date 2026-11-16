@@ -2,9 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import './Stage2Childhood.css';
 
 const childhoodPhotos = [
-  { id: 1, src: '/photos/childhood1.jpg', alt: 'Little Noor as a baby', caption: 'Little Noor ✨', tag: 'little' },
-  { id: 2, src: '/photos/childhood2.jpg', alt: 'Little Noor smiling', caption: 'Little Angel 💖', tag: 'little' },
-  { id: 3, src: '/photos/childhood3.jpg', alt: 'Noor growing up', caption: 'Growing Fast 🦋', tag: 'growing' },
+  { id: 1, src: './photos/childhood1.jpg', alt: 'Little Noor as a baby', caption: 'Little Noor ✨', tag: 'little' },
+  { id: 2, src: './photos/childhood2.jpg', alt: 'Little Noor smiling', caption: 'Little Angel 💖', tag: 'little' },
+  { id: 3, src: './photos/childhood3.jpg', alt: 'Noor growing up', caption: 'Growing Fast 🦋', tag: 'growing' },
 ];
 
 function Stage2Childhood({ onComplete }) {

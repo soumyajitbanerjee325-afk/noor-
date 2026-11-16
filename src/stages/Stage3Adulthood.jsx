@@ -2,9 +2,9 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import './Stage3Adulthood.css';
 
 const adulthoodPhotos = [
-  { id: 1, src: '/photos/adult1.jpg', alt: 'Noor glowing', caption: 'Ethereal Noor 💜' },
-  { id: 2, src: '/photos/adult2.jpg', alt: 'Noor gorgeous', caption: 'Gorgeous Soul 🌹' },
-  { id: 3, src: '/photos/adult3.jpg', alt: 'Noor dreamy', caption: 'Dreamy & Beautiful 💫' },
+  { id: 1, src: './photos/adult1.jpg', alt: 'Noor glowing', caption: 'Ethereal Noor 💜' },
+  { id: 2, src: './photos/adult2.jpg', alt: 'Noor gorgeous', caption: 'Gorgeous Soul 🌹' },
+  { id: 3, src: './photos/adult3.jpg', alt: 'Noor dreamy', caption: 'Dreamy & Beautiful 💫' },
 ];
 
 function Stage3Adulthood({ onComplete }) {

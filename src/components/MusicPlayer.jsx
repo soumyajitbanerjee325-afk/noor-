@@ -8,7 +8,7 @@ function MusicPlayer({ enabled, onToggle }) {
 
   useEffect(() => {
     if (enabled && !audioRef.current) {
-      audioRef.current = new Audio('/music/romantic-bgm.mp3');
+      audioRef.current = new Audio('./music/romantic-bgm.mp3');
       audioRef.current.loop = true;
       audioRef.current.volume = 0.3;
       
